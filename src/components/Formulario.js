@@ -1,5 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import uuid from 'uuid/dist/v4';
+import PropTypes from 'prop-types';
 
 const Formulario = ({crear_cita}) => {
     //crear state de citas
@@ -39,7 +40,7 @@ const Formulario = ({crear_cita}) => {
             return;            
         }
         //eliminar el mensaje previo
-        actualizar_error(true);
+        actualizar_error(false);
 
         //Asignar un ID
         cita.id = uuid();
@@ -48,6 +49,13 @@ const Formulario = ({crear_cita}) => {
         crear_cita(cita);
 
         //Reiniciar form
+	actualizar_cita({
+	  mascota: '',
+	  propietario:'',
+	  fecha: '',
+	  hora: '',
+	  sintomas: ''
+	})
 
     }
 
@@ -106,6 +114,10 @@ const Formulario = ({crear_cita}) => {
             </form>
         </Fragment>
     );
+}
+
+Formulario.propTypes = {
+    crear_cita: PropTypes.func.isRequired
 }
 
 export default Formulario;
